@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <!-- Homepage / Main Studio Workspace -->
    <url>
-      <loc>https://your-domain.vercel.app/</loc>
+      <loc>https://pixel-draw-alpha.vercel.app/</loc>
       <lastmod>2026-07-08</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
@@ -10,7 +10,7 @@
    
    <!-- About Us Page -->
    <url>
-      <loc>https://your-domain.vercel.app/about.html</loc>
+      <loc>https://pixel-draw-alpha.vercel.app/about.html</loc>
       <lastmod>2026-07-08</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.7</priority>
@@ -18,7 +18,7 @@
    
    <!-- Privacy Policy Page -->
    <url>
-      <loc>https://your-domain.vercel.app/privacy.html</loc>
+      <loc>https://pixel-draw-alpha.vercel.app/privacy.html</loc>
       <lastmod>2026-07-08</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.3</priority>

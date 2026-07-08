@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Direct search engine crawlers to your sitemap
-Sitemap: https://your-domain.vercel.app/sitemap.xml
+Sitemap: https://pixel-draw-alpha.vercel.app/sitemap.xml
