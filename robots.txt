@@ -1,0 +1,6 @@
+# Allow all search engines to crawl and index the website
+User-agent: *
+Allow: /
+
+# Direct search engine crawlers to your sitemap
+Sitemap: https://your-domain.vercel.app/sitemap.xml

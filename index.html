@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Primary SEO Meta Tags -->
+	<title>Pixel Animation Studio Ultra Pro - Free Online Sprite Editor</title>
+	<meta name="description"
+		content="Create, animate, and export pixel art directly in your browser. Features onion skinning, image conversion, color palette extraction, and game sprite sheet exports.">
+	<meta name="keywords"
+		content="pixel art, sprite sheet generator, animation studio, game dev tools, pixel editor, free online tool, onion skinning, canvas pixel art">
+	<meta name="robots" content="index, follow">
+
+	<!-- Open Graph / Social Media SEO -->
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Pixel Animation Studio Ultra Pro">
+	<meta property="og:description"
+		content="The ultimate browser-based pixel art editor and animation suite for indie game developers.">
+	<meta property="og:url" content="https://your-domain.vercel.app/">
+
+	<!-- Google Analytics (gtag.js) - Replace G-YOUR-ACTUAL-ID with your real ID -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR-ACTUAL-ID"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'G-YOUR-ACTUAL-ID');
+	</script>
+	<style>
+		:root {
+			--bg-color: #0f0f13;
+			--panel-color: #1a1a22;
+			--border-color: #2e2e3a;
+			--text-color: #e2e2e9;
+			--accent-color: #ff0055;
+			--success-color: #28a745;
+			--info-color: #17a2b8;
+		}
+
+
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background-color: var(--bg-color);
+			color: var(--text-color);
+			margin: 0;
+			padding: 0;
+			line-height: 1.6;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		header {
+			text-align: center;
+			padding: 40px 0 20px 0;
+		}
+
+		header h1 {
+			color: #fff;
+			margin-bottom: 5px;
+			font-size: 2.5rem;
+		}
+
+		header p {
+			color: var(--text-muted);
+			margin-top: 0;
+		}
+
+		/* App Workspace Placeholder */
+		#app-workspace {
+			background-color: var(--panel-color);
+			border: 2px dashed var(--border-color);
+			border-radius: 12px;
+			min-height: 500px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 60px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+		}
+
+		/* SEO Articles & Info Sections */
+		.info-section {
+			margin-bottom: 60px;
+		}
+
+		.section-title {
+			font-size: 2rem;
+			color: #fff;
+			border-bottom: 2px solid var(--border-color);
+			padding-bottom: 10px;
+			margin-bottom: 30px;
+		}
+
+		.grid-3 {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 30px;
+		}
+
+		.card {
+			background-color: var(--panel-color);
+			padding: 25px;
+			border-radius: 8px;
+			border: 1px solid var(--border-color);
+		}
+
+		.card h3 {
+			color: var(--accent-color);
+			margin-top: 0;
+			font-size: 1.3rem;
+		}
+
+		.card p {
+			color: var(--text-muted);
+			font-size: 0.95rem;
+		}
+
+		/* Guide / Article Layout */
+		.article-step {
+			margin-bottom: 25px;
+			padding-left: 20px;
+			border-left: 3px solid var(--accent-color);
+		}
+
+		.article-step h4 {
+			margin: 0 0 5px 0;
+			color: #fff;
+			font-size: 1.15rem;
+		}
+
+		.article-step p {
+			margin: 0;
+			color: var(--text-muted);
+		}
+
+		/* Footer */
+		footer {
+			margin-top: 80px;
+			padding: 30px 20px;
+			text-align: center;
+			font-size: 0.9rem;
+			border-top: 1px solid var(--border-color);
+			color: var(--text-muted);
+		}
+
+		footer a {
+			color: var(--accent-color);
+			text-decoration: none;
+			margin: 0 10px;
+		}
+
+		footer a:hover {
+			text-decoration: underline;
+		}
+
+
+		body {
+			font-family: 'Segoe UI', system-ui, sans-serif;
+			background-color: var(--bg-color);
+			color: var(--text-color);
+			margin: 0;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.app-container {
+			display: grid;
+			grid-template-columns: 1fr 340px;
+			gap: 20px;
+			width: 100%;
+			max-width: 1200px;
+		}
+
+		.editor-panel {
+			background-color: var(--panel-color);
+			padding: 20px;
+			border-radius: 8px;
+			border: 1px solid var(--border-color);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.main-toolbar {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			width: 100%;
+			justify-content: space-between;
+			margin-bottom: 15px;
+			padding-bottom: 15px;
+			border-bottom: 1px solid var(--border-color);
+			align-items: center;
+		}
+
+		.tool-group {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			align-items: center;
+		}
+
+		label {
+			font-size: 0.8rem;
+			color: #99a;
+			font-weight: bold;
+		}
+
+		input[type="number"],
+		input[type="file"],
+		input[type="range"] {
+			background: #252530;
+			color: white;
+			border: 1px solid var(--border-color);
+			padding: 6px;
+			border-radius: 4px;
+			font-size: 0.85rem;
+		}
+
+		input[type="number"] {
+			width: 60px;
+			text-align: center;
+		}
+
+		input[type="color"] {
+			border: none;
+			width: 34px;
+			height: 34px;
+			cursor: pointer;
+			background: none;
+		}
+
+		button {
+			background-color: #252530;
+			color: white;
+			border: 1px solid var(--border-color);
+			padding: 6px 12px;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 0.85rem;
+		}
+
+		button.active {
+			background-color: var(--accent-color);
+			border-color: var(--accent-color);
+		}
+
+		.grid-wrapper {
+			position: relative;
+			width: 480px;
+			height: 480px;
+			background-color: #161620;
+			border: 2px solid var(--border-color);
+			margin-bottom: 15px;
+			box-sizing: border-box;
+		}
+
+		.grid {
+			display: grid !important;
+			width: 100% !important;
+			height: 100% !important;
+			user-select: none;
+		}
+
+		.cell {
+			display: block !important;
+			width: 100% !important;
+			height: 100% !important;
+			box-sizing: border-box !important;
+			outline: 1px solid rgba(255, 255, 255, 0.15) !important;
+			background-color: transparent;
+			cursor: crosshair;
+		}
+
+		.timeline-panel {
+			width: 100%;
+			background: #111116;
+			border-radius: 6px;
+			padding: 12px;
+			box-sizing: border-box;
+		}
+
+		.timeline-controls {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-bottom: 10px;
+			align-items: center;
+		}
+
+		.frames-strip {
+			display: flex;
+			gap: 8px;
+			overflow-x: auto;
+			padding-bottom: 5px;
+			min-height: 60px;
+		}
+
+		.frame-thumb {
+			width: 52px;
+			height: 52px;
+			border: 2px solid var(--border-color);
+			background-color: #0b0b0e;
+			border-radius: 4px;
+			cursor: pointer;
+			position: relative;
+		}
+
+		.frame-thumb.active {
+			border-color: var(--accent-color);
+		}
+
+		.thumb-pixel {
+			width: 2px;
+			height: 2px;
+			background: transparent;
+			position: absolute;
+			top: 8px;
+			left: 8px;
+		}
+
+		.sidebar {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+
+		.side-box {
+			background-color: var(--panel-color);
+			padding: 15px;
+			border-radius: 8px;
+			border: 1px solid var(--border-color);
+		}
+
+		.preview-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 140px;
+			background-color: #0b0b0e;
+			border-radius: 4px;
+			position: relative;
+		}
+
+		#live-anim-pixel {
+			width: 4px;
+			height: 4px;
+			background: transparent;
+			position: absolute;
+			top: 20px;
+			left: 110px;
+		}
+
+		.palette-grid {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			margin-top: 10px;
+			max-height: 75px;
+			overflow-y: auto;
+		}
+
+		.palette-swatch {
+			width: 22px;
+			height: 22px;
+			border-radius: 4px;
+			cursor: pointer;
+			border: 1px solid var(--border-color);
+		}
+
+		textarea {
+			width: 100%;
+			height: 100px;
+			background-color: #0b0b0e;
+			color: #a6e22e;
+			border: 1px solid var(--border-color);
+			border-radius: 4px;
+			font-family: monospace;
+			font-size: 0.75rem;
+			padding: 8px;
+			resize: none;
+			box-sizing: border-box;
+		}
+
+		.action-btn {
+			width: 100%;
+			border: none;
+			margin-top: 8px;
+			font-weight: bold;
+			padding: 10px;
+			text-align: center;
+			color: white;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>Pixel Animation Studio Ultra Pro</h1>
+	<div class="app-container">
+		<div class="editor-panel">
+			<div class="main-toolbar">
+				<div class="tool-group">
+					<input type="color" id="colorPicker" value="#ff0055">
+					<button id="btn-pencil" class="active">✏️ Pencil</button>
+					<button id="btn-line">📏 Line</button>
+					<button id="btn-rect">🟥 Rect</button>
+					<button id="btn-circle">⭕ Circle</button>
+					<button id="btn-bucket">🪣 Bucket</button>
+					<button id="btn-magice_eraser" style="color: #ffc107;">🪄 Magic Eraser</button>
+					<button id="btn-eraser">🧽 Eraser</button>
+				</div>
+
+				<div class="tool-group">
+					<label>Grid Size:</label>
+					<input type="number" id="customGridInput" value="16" min="4" max="128">
+					<button id="applyGridBtn">Set</button>
+				</div>
+
+				<div class="tool-group">
+					<label>Convert Pic:</label>
+					<input type="file" id="imageConverterInput" accept="image/*">
+				</div>
+			</div>
+
+			<div class="grid-wrapper">
+				<div class="grid" id="pixelGrid"></div>
+			</div>
+
+			<div class="timeline-panel">
+				<div class="timeline-controls">
+					<button id="addFrameBtn" style="background-color: var(--success-color);">➕ Add Frame</button>
+					<button id="playBtn" style="background-color: var(--info-color);">▶️ Play Loop</button>
+					<button id="deleteFrameBtn" style="background-color: #dc3545;">❌ Delete</button>
+
+					<div style="border-left: 1px solid var(--border-color); height: 25px; margin: 0 5px;"></div>
+
+					<label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size:0.85rem;">
+						<input type="checkbox" id="onionSkinToggle" checked> 🧅 Onion Skin
+					</label>
+
+					<div style="display: inline-flex; align-items: center; gap: 8px; margin-left: auto;">
+						<label>Speed (FPS): <span id="fpsVal" style="color:var(--accent-color)">6</span></label>
+						<input type="range" id="fpsSlider" min="1" max="24" value="6" style="width:90px;">
+					</div>
+				</div>
+				<div class="frames-strip" id="framesStrip"></div>
+			</div>
+		</div>
+
+		<div class="sidebar">
+			<div class="side-box">
+				<h3>Live Preview</h3>
+				<div class="preview-container">
+					<div id="live-anim-pixel"></div>
+				</div>
+				<div class="palette-grid" id="extractedPalette"></div>
+			</div>
+
+			<div class="side-box">
+				<h3>Export Options</h3>
+				<textarea id="cssOutput" readonly></textarea>
+				<button id="copyBtn" class="action-btn" style="background: var(--info-color);">📋 Copy CSS</button>
+				<button id="downloadZipBtn" class="action-btn" style="background: #4b4b5e;">📦 Download ZIP Frames</button>
+				<button id="downloadSpriteSheetBtn" class="action-btn" style="background: var(--success-color);">🖼️ Export Game
+					Sprite Sheet</button>
+			</div>
+		</div>
+	</div>
+	<section class="info-section">
+		<h2 class="section-title">Why Use Pixel Animation Studio Ultra Pro?</h2>
+		<div class="grid-3">
+			<div class="card">
+				<h3>Zero Installation, Zero Cost</h3>
+				<p>Forget heavy desktop software or paid subscriptions. Our tool runs instantly right in your browser,
+					completely free. Perfect for game jams, prototyping, and daily production.</p>
+			</div>
+			<div class="card">
+				<h3>Built for Game Developers</h3>
+				<p>Export smooth animations directly into unified sprite sheets or optimized GIFs. Fully compatible with major
+					engines like Unity, Godot, and Unreal Engine.</p>
+			</div>
+			<div class="card">
+				<h3>Advanced Suite Toolkit</h3>
+				<p>Leverage cutting-edge helper tools including built-in onion skinning for frame alignment, smart
+					image-to-pixel conversion algorithms, and instant palette extractions.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION 2: How-To Guides (Rich Text Articles for Great SEO Rankings) -->
+	<section class="info-section">
+		<h2 class="section-title">How to Use the Creative Tools</h2>
+		<div class="grid-3">
+
+			<div class="card">
+				<h3>1. Creating & Animating</h3>
+				<div class="article-step">
+					<h4>Set the Grid</h4>
+					<p>Pick your standard asset resolution (such as 16x16, 32x32, or 64x64 pixels) to start crisp.</p>
+				</div>
+				<div class="article-step">
+					<h4>Manage Frames</h4>
+					<p>Use the timeline panel below the canvas to add, duplicate, or delete animation frames.</p>
+				</div>
+				<div class="article-step">
+					<h4>Toggle Onion Skin</h4>
+					<p>Enable onion skinning to see a faint silhouette of your previous frame, ensuring flawless motion tracking.
+					</p>
+				</div>
+			</div>
+
+			<div class="card">
+				<h3>2. Smart Conversion & Palettes</h3>
+				<div class="article-step">
+					<h4>Image-to-Pixel Conversion</h4>
+					<p>Drag and drop any regular reference photo straight into the converter tool to downscale it into dynamic,
+						editable pixel art.</p>
+				</div>
+				<div class="article-step">
+					<h4>Palette Extraction</h4>
+					<p>Upload source graphics to instantly extract cohesive, harmonious color color palettes, ensuring aesthetic
+						consistency across your game world.</p>
+				</div>
+			</div>
+
+			<div class="card">
+				<h3>3. Final Production Export</h3>
+				<div class="article-step">
+					<h4>Sprite Sheet Configuration</h4>
+					<p>Arrange your horizontal and vertical frame columns symmetrically before generating the file.</p>
+				</div>
+				<div class="article-step">
+					<h4>Download & Deploy</h4>
+					<p>Hit the export button to instantly download transparent PNG sheets or looping GIF formats ready to import
+						directly into your project build.</p>
+				</div>
+			</div>
+
+		</div>
+	</section>
+	<footer>
+		<p>© 2026 Pixel Animation Studio Ultra Pro. All rights reserved.</p>
+		<p>
+			<a href="about.html">About Us</a> |
+			<a href="privacy.html">Privacy Policy</a>
+		</p>
+	</footer>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+	<script>
+		let GRID_SIZE = 16;
+		let CSS_PIXEL_SCALE = 4;
+
+		const gridElement = document.getElementById('pixelGrid');
+		const colorPicker = document.getElementById('colorPicker');
+		const customGridInput = document.getElementById('customGridInput');
+		const applyGridBtn = document.getElementById('applyGridBtn');
+		const imageConverterInput = document.getElementById('imageConverterInput');
+		const framesStrip = document.getElementById('framesStrip');
+		const liveAnimPixel = document.getElementById('live-anim-pixel');
+		const cssOutput = document.getElementById('cssOutput');
+		const onionSkinToggle = document.getElementById('onionSkinToggle');
+		const fpsSlider = document.getElementById('fpsSlider');
+		const fpsVal = document.getElementById('fpsVal');
+		const extractedPaletteContainer = document.getElementById('extractedPalette');
+		const downloadSpriteSheetBtn = document.getElementById('downloadSpriteSheetBtn');
+
+		const toolButtons = {
+			'pencil': document.getElementById('btn-pencil'),
+			'line': document.getElementById('btn-line'),
+			'rect': document.getElementById('btn-rect'),
+			'circle': document.getElementById('btn-circle'),
+			'bucket': document.getElementById('btn-bucket'),
+			'magice_eraser': document.getElementById('btn-magice_eraser'),
+			'eraser': document.getElementById('btn-eraser')
+		};
+
+		const addFrameBtn = document.getElementById('addFrameBtn');
+		const playBtn = document.getElementById('playBtn');
+		const deleteFrameBtn = document.getElementById('deleteFrameBtn');
+		const copyBtn = document.getElementById('copyBtn');
+		const downloadZipBtn = document.getElementById('downloadZipBtn');
+
+		let currentTool = 'pencil';
+		let isDrawing = false;
+		let isPlaying = true;
+		let frames = [{}];
+		let activeFrameIndex = 0;
+		let startX = 0, startY = 0;
+		let extractedColorsSet = new Set();
+
+		function initApp() {
+			CSS_PIXEL_SCALE = GRID_SIZE >= 64 ? 1 : (GRID_SIZE >= 32 ? 2 : 4);
+			buildGridDOM();
+			renderFrame();
+			updateTimelineUI();
+			updateExportAndPreview();
+		}
+
+		function buildGridDOM() {
+			gridElement.innerHTML = '';
+			gridElement.style.gridTemplateColumns = `repeat(${GRID_SIZE}, 1fr)`;
+			gridElement.style.gridTemplateRows = `repeat(${GRID_SIZE}, 1fr)`;
+
+			for (let y = 0; y < GRID_SIZE; y++) {
+				for (let x = 0; x < GRID_SIZE; x++) {
+					const cell = document.createElement('div');
+					cell.classList.add('cell');
+					cell.setAttribute('data-x', x);
+					cell.setAttribute('data-y', y);
+
+					cell.addEventListener('mousedown', (e) => {
+						isDrawing = true; startX = x; startY = y;
+						if (['pencil', 'eraser', 'bucket', 'magice_eraser'].includes(currentTool)) {
+							executeImmediateTool(x, y);
+						}
+					});
+
+					cell.addEventListener('mouseenter', () => {
+						if (!isDrawing) return;
+						if (['pencil', 'eraser'].includes(currentTool)) {
+							executeImmediateTool(x, y);
+						} else if (['line', 'rect', 'circle'].includes(currentTool)) {
+							renderFrame(startX, startY, x, y);
+						}
+					});
+
+					cell.addEventListener('mouseup', () => {
+						if (isDrawing && ['line', 'rect', 'circle'].includes(currentTool)) {
+							commitShapeData(startX, startY, x, y);
+						}
+						isDrawing = false;
+					});
+
+					gridElement.appendChild(cell);
+				}
+			}
+		}
+
+		window.addEventListener('mouseup', () => { isDrawing = false; });
+
+		Object.keys(toolButtons).forEach(tool => {
+			toolButtons[tool].addEventListener('click', () => {
+				Object.values(toolButtons).forEach(btn => btn.classList.remove('active'));
+				toolButtons[tool].classList.add('active');
+				currentTool = tool;
+			});
+		});
+
+		applyGridBtn.addEventListener('click', () => {
+			let val = parseInt(customGridInput.value);
+			if (isNaN(val) || val < 4 || val > 128) return;
+			GRID_SIZE = val; frames = [{}]; activeFrameIndex = 0; initApp();
+		});
+
+		onionSkinToggle.addEventListener('change', renderFrame);
+
+		fpsSlider.addEventListener('input', () => {
+			fpsVal.innerText = fpsSlider.value;
+			updateExportAndPreview();
+		});
+
+		function renderFrame(pX1 = null, pY1 = null, pX2 = null, pY2 = null) {
+			const currentFrameData = frames[activeFrameIndex];
+			const prevFrameData = activeFrameIndex > 0 ? frames[activeFrameIndex - 1] : null;
+			const useOnionSkin = onionSkinToggle.checked;
+
+			const previewMap = {};
+			if (pX1 !== null && isDrawing) {
+				calculateShapePixels(pX1, pY1, pX2, pY2).forEach(([px, py]) => {
+					if (px >= 0 && px < GRID_SIZE && py >= 0 && py < GRID_SIZE) {
+						previewMap[`${px},${py}`] = colorPicker.value;
+					}
+				});
+			}
+
+			const activeCells = gridElement.querySelectorAll('.cell');
+			activeCells.forEach(cell => {
+				const x = cell.getAttribute('data-x');
+				const y = cell.getAttribute('data-y');
+				const key = `${x},${y}`;
+
+				let targetColor = previewMap[key] || currentFrameData[key];
+
+				if (targetColor) {
+					cell.style.backgroundColor = targetColor;
+					cell.style.opacity = "1";
+				} else if (useOnionSkin && prevFrameData && prevFrameData[key]) {
+					// Render historical frame underneath with 25% opacity
+					cell.style.backgroundColor = prevFrameData[key];
+					cell.style.opacity = "0.25";
+				} else {
+					cell.style.backgroundColor = 'transparent';
+					cell.style.opacity = "1";
+				}
+			});
+		}
+
+		imageConverterInput.addEventListener('change', function (e) {
+			const file = e.target.files[0];
+			if (!file) return;
+
+			const reader = new FileReader();
+			reader.onload = function (event) {
+				const tempImg = new Image();
+				tempImg.onload = function () {
+					const canvas = document.createElement('canvas');
+					const ctx = canvas.getContext('2d');
+					canvas.width = GRID_SIZE; canvas.height = GRID_SIZE;
+
+					ctx.imageSmoothingEnabled = false;
+					ctx.drawImage(tempImg, 0, 0, GRID_SIZE, GRID_SIZE);
+
+					const imgData = ctx.getImageData(0, 0, GRID_SIZE, GRID_SIZE).data;
+
+					frames[activeFrameIndex] = {};
+					const targetFrame = frames[activeFrameIndex];
+
+					for (let y = 0; y < GRID_SIZE; y++) {
+						for (let x = 0; x < GRID_SIZE; x++) {
+							let index = (y * GRID_SIZE + x) * 4;
+							let r = imgData[index];
+							let g = imgData[index + 1];
+							let b = imgData[index + 2];
+							let a = imgData[index + 3];
+
+							if (a > 10) {
+								let hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+								targetFrame[`${x},${y}`] = hex;
+								extractedColorsSet.add(hex);
+							}
+						}
+					}
+
+					buildPaletteUI();
+					renderFrame();
+					updateTimelineThumbnail(activeFrameIndex);
+					updateExportAndPreview();
+				};
+				tempImg.src = event.target.result;
+			};
+			reader.readAsDataURL(file);
+		});
+
+		function buildPaletteUI() {
+			extractedPaletteContainer.innerHTML = '';
+			if (extractedColorsSet.size === 0) return;
+
+			extractedColorsSet.forEach(color => {
+				const swatch = document.createElement('div');
+				swatch.classList.add('palette-swatch');
+				swatch.style.backgroundColor = color;
+				swatch.title = color;
+				swatch.addEventListener('click', () => {
+					colorPicker.value = color;
+				});
+				extractedPaletteContainer.appendChild(swatch);
+			});
+		}
+
+		function executeImmediateTool(x, y) {
+			const key = `${x},${y}`;
+			const frame = frames[activeFrameIndex];
+
+			if (currentTool === 'pencil') { frame[key] = colorPicker.value; }
+			else if (currentTool === 'eraser') { delete frame[key]; }
+			else if (currentTool === 'bucket') { floodFill(x, y, frame[key], colorPicker.value, false); }
+			else if (currentTool === 'magice_eraser') { floodFill(x, y, frame[key], null, true); }
+
+			renderFrame(); updateTimelineThumbnail(activeFrameIndex); updateExportAndPreview();
+		}
+
+		function floodFill(startX, startY, targetColor, replacementColor, isMagicEraser = false) {
+			const frame = frames[activeFrameIndex];
+			const baseColor = targetColor || undefined;
+			const fillColor = isMagicEraser ? undefined : replacementColor;
+			if (baseColor === fillColor) return;
+
+			const queue = [[startX, startY]];
+			const visited = new Set();
+
+			while (queue.length > 0) {
+				const [x, y] = queue.shift();
+				const key = `${x},${y}`;
+				if (visited.has(key)) continue;
+				visited.add(key);
+
+				if (x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE) {
+					const currentCellColor = frame[key] || undefined;
+					if (currentCellColor === baseColor) {
+						if (isMagicEraser) { delete frame[key]; } else { frame[key] = fillColor; }
+						queue.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+					}
+				}
+			}
+		}
+
+		function calculateShapePixels(x1, y1, x2, y2) {
+			const pixels = [];
+			if (currentTool === 'line') {
+				let dx = Math.abs(x2 - x1), dy = Math.abs(y2 - y1);
+				let sx = (x1 < x2) ? 1 : -1, sy = (y1 < y2) ? 1 : -1;
+				let err = dx - dy;
+				while (true) {
+					pixels.push([x1, y1]);
+					if (x1 === x2 && y1 === y2) break;
+					let e2 = 2 * err;
+					if (e2 > -dy) { err -= dy; x1 += sx; }
+					if (e2 < dx) { err += dx; y1 += sy; }
+				}
+			}
+			else if (currentTool === 'rect') {
+				let minX = Math.min(x1, x2), maxX = Math.max(x1, x2);
+				let minY = Math.min(y1, y2), maxY = Math.max(y1, y2);
+				for (let x = minX; x <= maxX; x++) { pixels.push([x, minY], [x, maxY]); }
+				for (let y = minY; y <= maxY; y++) { pixels.push([minX, y], [maxX, y]); }
+			}
+			else if (currentTool === 'circle') {
+				let r = Math.round(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
+				let x = r, y = 0, error = 1 - x;
+				while (x >= y) {
+					pixels.push(
+						[x1 + x, y1 + y], [x1 + y, y1 + x], [x1 - y, y1 + x], [x1 - x, y1 + y],
+						[x1 - x, y1 - y], [x1 - y, y1 - x], [x1 + y, y1 - x], [x1 + x, y1 - y]
+					);
+					y++;
+					if (error < 0) error += 2 * y + 1;
+					else { x--; error += 2 * (y - x) + 1; }
+				}
+			}
+			return pixels;
+		}
+
+		function commitShapeData(x1, y1, x2, y2) {
+			const frame = frames[activeFrameIndex];
+			const color = colorPicker.value;
+			calculateShapePixels(x1, y1, x2, y2).forEach(([px, py]) => {
+				if (px >= 0 && px < GRID_SIZE && py >= 0 && py < GRID_SIZE) frame[`${px},${py}`] = color;
+			});
+			renderFrame(); updateTimelineThumbnail(activeFrameIndex); updateExportAndPreview();
+		}
+
+		function updateTimelineUI() {
+			framesStrip.innerHTML = '';
+			frames.forEach((frame, index) => {
+				const thumb = document.createElement('div'); thumb.classList.add('frame-thumb'); thumb.dataset.index = index + 1;
+				if (index === activeFrameIndex) thumb.classList.add('active');
+
+				const pixelPointer = document.createElement('div'); pixelPointer.classList.add('thumb-pixel');
+				pixelPointer.style.boxShadow = generateShadowString(frame, 0.1);
+				thumb.appendChild(pixelPointer);
+
+				thumb.addEventListener('click', () => {
+					if (isPlaying) togglePlayState();
+					activeFrameIndex = index; renderFrame(); updateTimelineUI();
+				});
+				framesStrip.appendChild(thumb);
+			});
+		}
+
+		function updateTimelineThumbnail(index) {
+			const thumb = framesStrip.children[index];
+			if (thumb) thumb.querySelector('.thumb-pixel').style.boxShadow = generateShadowString(frames[index], 0.1);
+		}
+
+		function generateShadowString(frameData, scale) {
+			const shadows = [];
+			for (let key in frameData) {
+				const [x, y] = key.split(',').map(Number);
+				shadows.push(`${x * scale}px ${y * scale}px 0 ${frameData[key]}`);
+			}
+			return shadows.length > 0 ? shadows.join(', ') : 'none';
+		}
+
+		function updateExportAndPreview() {
+			const totalFrames = frames.length; const animName = "suiteLoop";
+			const currentFps = parseInt(fpsSlider.value);
+			const totalDurationSec = totalFrames / currentFps;
+
+			let keyframesCSS = `@keyframes ${animName} {\n`;
+			frames.forEach((frame, index) => {
+				const percentage = ((index / totalFrames) * 100).toFixed(2);
+				const nextPercentage = (((index + 0.99) / totalFrames) * 100).toFixed(2);
+				const shadow = generateShadowString(frame, CSS_PIXEL_SCALE);
+				keyframesCSS += `  ${percentage}% { box-shadow: ${shadow}; }\n`;
+				if (totalFrames > 1) keyframesCSS += `  ${nextPercentage}% { box-shadow: ${shadow}; }\n`;
+			});
+			keyframesCSS += `  100% { box-shadow: ${generateShadowString(frames[0], CSS_PIXEL_SCALE)}; }\n}`;
+			cssOutput.value = keyframesCSS;
+
+			let styleTag = document.getElementById('dynamic-styles');
+			if (!styleTag) { styleTag = document.createElement('style'); styleTag.id = 'dynamic-styles'; document.head.appendChild(styleTag); }
+			styleTag.innerHTML = keyframesCSS;
+
+			if (isPlaying) {
+				liveAnimPixel.style.animation = 'none'; liveAnimPixel.offsetHeight;
+				liveAnimPixel.style.animation = `${animName} ${totalDurationSec}s infinite steps(1)`;
+			}
+		}
+
+		function togglePlayState() {
+			isPlaying = !isPlaying;
+			if (isPlaying) {
+				playBtn.innerText = "⏸️ Pause Preview"; updateExportAndPreview();
+			} else {
+				playBtn.innerText = "▶️ Play Loop"; liveAnimPixel.style.animation = 'none';
+				liveAnimPixel.style.boxShadow = generateShadowString(frames[activeFrameIndex], CSS_PIXEL_SCALE);
+			}
+		}
+
+		// --- EXPORT 2: PRODUCTION GAME ENGINE SPRITE SHEET ---
+		downloadSpriteSheetBtn.addEventListener('click', () => {
+			const totalFrames = frames.length;
+			const exportCanvas = document.createElement('canvas');
+			const ctx = exportCanvas.getContext('2d');
+
+			// Standard pixel density mapping factor for crisp rendering (32px per unit grid cell)
+			const exportCellDensity = 32;
+			const frameWidth = GRID_SIZE * exportCellDensity;
+
+			exportCanvas.width = frameWidth * totalFrames;
+			exportCanvas.height = GRID_SIZE * exportCellDensity;
+
+			frames.forEach((frameData, frameIdx) => {
+				const frameOffsetLeft = frameIdx * frameWidth;
+				for (let key in frameData) {
+					const [x, y] = key.split(',').map(Number);
+					ctx.fillStyle = frameData[key];
+					ctx.fillRect(
+						frameOffsetLeft + (x * exportCellDensity),
+						(y * exportCellDensity),
+						exportCellDensity,
+						exportCellDensity
+					);
+				}
+			});
+
+			const downloadLink = document.createElement('a');
+			downloadLink.href = exportCanvas.toDataURL('image/png');
+			downloadLink.download = `spritesheet_${GRID_SIZE}x${GRID_SIZE}.png`;
+			document.body.appendChild(downloadLink); downloadLink.click();
+			document.body.removeChild(downloadLink);
+		});
+
+		downloadZipBtn.addEventListener('click', async () => {
+			const zip = new JSZip();
+			const exportCanvas = document.createElement('canvas');
+			const ctx = exportCanvas.getContext('2d');
+			const outResolution = 512;
+			exportCanvas.width = outResolution; exportCanvas.height = outResolution;
+			const factor = outResolution / GRID_SIZE;
+
+			for (let i = 0; i < frames.length; i++) {
+				ctx.clearRect(0, 0, outResolution, outResolution);
+				const frameData = frames[i];
+				for (let key in frameData) {
+					const [x, y] = key.split(',').map(Number);
+					ctx.fillStyle = frameData[key];
+					ctx.fillRect(x * factor, y * factor, factor, factor);
+				}
+				const dataUrl = exportCanvas.toDataURL('image/png');
+				const base64Data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+				zip.file(`frame_${String(i + 1).padStart(3, '0')}.png`, base64Data, { base64: true });
+			}
+
+			const content = await zip.generateAsync({ type: "blob" });
+			const downloadLink = document.createElement('a');
+			downloadLink.href = URL.createObjectURL(content);
+			downloadLink.download = "pixel-animation-frames.zip";
+			document.body.appendChild(downloadLink); downloadLink.click();
+			document.body.removeChild(downloadLink);
+		});
+
+		addFrameBtn.addEventListener('click', () => {
+			frames.splice(activeFrameIndex + 1, 0, JSON.parse(JSON.stringify(frames[activeFrameIndex])));
+			activeFrameIndex++; if (isPlaying) togglePlayState(); initApp();
+		});
+
+		deleteFrameBtn.addEventListener('click', () => {
+			if (frames.length <= 1) return;
+			frames.splice(activeFrameIndex, 1);
+			if (activeFrameIndex >= frames.length) activeFrameIndex = frames.length - 1;
+			if (isPlaying) togglePlayState(); initApp();
+		});
+
+		playBtn.addEventListener('click', togglePlayState);
+		copyBtn.addEventListener('click', () => {
+			cssOutput.select(); document.execCommand('copy'); alert("CSS Animations copied!");
+		});
+
+		initApp(); togglePlayState();
+	</script>
+</body>
+
+</html>
